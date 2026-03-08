@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Weather App</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+
+<body class="
+{% if weather_main == 'Clear' %}bg-warning
+{% elif weather_main == 'Clouds' %}bg-secondary
+{% elif weather_main == 'Rain' %}bg-info
+{% else %}bg-light
+{% endif %}
+">
+
+<div class="container mt-5">
+
+<h1 class="text-center mb-4 text-dark">Weather App</h1>
+
+<form method="GET" class="d-flex justify-content-center mb-4">
+
+<input class="form-control w-50 me-2" type="text" name="city" placeholder="Enter city">
+
+<button class="btn btn-primary">Search</button>
+
+</form>
+
+
+{% if error %}
+
+<div class="alert alert-danger text-center">
+{{ error }}
+</div>
+
+{% endif %}
+
+
+{% if city %}
+
+<div class="card text-center shadow p-4">
+
+<h2>{{ city }}</h2>
+
+
+<h3>{{ temperature }} °C</h3>
+
+<p class="text-capitalize">{{ description }}</p>
+
+</div>
+
+{% endif %}
+
+
+<div class="row mt-4">
+
+{% for item in forecast %}
+
+<div class="col-md-2">
+
+<div class="card text-center p-2 shadow">
+
+<p style="font-size:12px;">{{ item.dt_txt }}</p>
+
+<p>{{ item.main.temp }} °C</p>
+
+</div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+
+</div>
+
+</body>
+
+</html>
