@@ -1,17 +1,39 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 
 <title>Weather App</title>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+body {
+    transition: background 1s ease;
+}
 
+.clear-bg{
+    background: linear-gradient(to top, #fceabb, #f8b500);
+}
+
+.cloud-bg{
+    background: linear-gradient(to top, #bdc3c7, #2c3e50);
+}
+
+.rain-bg{
+    background: linear-gradient(to top, #4b79a1, #283e51);
+}
+
+.snow-bg{
+    background: linear-gradient(to top, #e6dada, #274046);
+}
+</style>
 </head>
 
 <body class="
-{% if weather_main == 'Clear' %}bg-warning
-{% elif weather_main == 'Clouds' %}bg-secondary
-{% elif weather_main == 'Rain' %}bg-info
+{% if weather_main == 'Clear' %}clear-bg
+{% elif weather_main == 'Clouds' %}cloud-bg
+{% elif weather_main == 'Rain' %}rain-bg
+{% elif weather_main == 'Snow' %}snow-bg
 {% else %}bg-light
 {% endif %}
 ">
@@ -77,6 +99,33 @@
 
 </div>
 
+
+
+<script>
+
+function getLocation() {
+
+if (navigator.geolocation) {
+
+navigator.geolocation.getCurrentPosition(showPosition);
+
+}
+
+}
+
+function showPosition(position) {
+
+let lat = position.coords.latitude;
+let lon = position.coords.longitude;
+
+window.location.href =
+`/?lat=${lat}&lon=${lon}`;
+
+}
+
+getLocation();
+
+</script>
 </body>
 
 </html>
